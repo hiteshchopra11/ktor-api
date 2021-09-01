@@ -10,8 +10,6 @@ import io.ktor.http.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.ktorm.dsl.*
 
 fun Application.notesRoutes() {
