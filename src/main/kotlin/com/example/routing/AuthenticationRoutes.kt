@@ -1,28 +1,35 @@
 package com.example.routing
 
-import com.example.db.DatabaseConnection
-import com.example.entities.UserEntity
+
+import com.example.jwt.JwtConfig
 import com.example.models.UserCredentials
 import io.ktor.application.*
+import io.ktor.auth.*
+import io.ktor.auth.jwt.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
-import org.ktorm.dsl.insert
-import java.util.*
 
 fun Application.authenticateRoutes() {
-    val db = DatabaseConnection.database
-
+    val secret = environment.config.property("jwt.secret").getString()
+    val issuer = environment.config.property("jwt.issuer").getString()
+    val audience = environment.config.property("jwt.audience").getString()
     routing {
-        post("/register") {
-            val userCredentials = call.receive<UserCredentials>()
-            val userName = userCredentials.username.lowercase(Locale.getDefault())
-            val password = userCredentials.hashedPassword()
-            db.insert(UserEntity) {
-                set(it.userName, userName)
-                set(it.password, password)
+        post("/generate_token") {
+            val user = call.receive<UserCredentials>()
+            println("${user.username} , pwd= ${user.password}")
+            val token = JwtConfig.generateToken(user, issuer, secret, audience)
+            call.respond(hashMapOf("token" to token))
+        }
+
+        authenticate("auth-jwt") {
+            get("/test") {
+                val principal = call.principal<JWTPrincipal>()
+                val username = principal!!.payload.getClaim("username").asString()
+                val expiresAt = principal.expiresAt?.time?.minus(System.currentTimeMillis())
+                println(call.response.status())
+                call.respondText("Hi $username!! Your token expires at $expiresAt ms.")
             }
-            call.respondText("Logged In Successfully")
         }
     }
 }

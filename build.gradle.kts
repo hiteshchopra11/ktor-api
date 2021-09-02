@@ -31,4 +31,11 @@ dependencies {
     implementation("mysql:mysql-connector-java:8.0.26")
     implementation("org.mindrot:jbcrypt:0.4")
 
+    // JWT Authentication
+    implementation("io.ktor:ktor-auth:$ktor_version")
+    implementation("io.ktor:ktor-auth-jwt:$ktor_version")
+
+    // Logging
+    implementation("ch.qos.logback:logback-classic:$logback_version")
+
 }

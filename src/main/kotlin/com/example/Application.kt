@@ -1,15 +1,16 @@
 package com.example
 
-import com.example.entities.NotesEntity
-import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import com.example.plugins.*
-import org.ktorm.database.Database
-import org.ktorm.dsl.*
+import io.ktor.application.*
+import io.ktor.features.*
 
-fun main() {
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
-        configureSerialization()
-        configureRouting()
-    }.start(wait = true)
+fun main(args: Array<String>): Unit = EngineMain.main(args)
+
+
+fun Application.module() {
+    install(CallLogging)
+    configureSerialization()
+    configureJWT()
+    configureRouting()
 }
