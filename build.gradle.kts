@@ -12,6 +12,7 @@ group = "com.example"
 version = "0.0.1"
 application {
     mainClass.set("com.example.ApplicationKt")
+    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=true")
 }
 
 repositories {
@@ -37,5 +38,8 @@ dependencies {
 
     // Logging
     implementation("ch.qos.logback:logback-classic:$logback_version")
+    implementation("io.ktor:ktor-metrics-micrometer:$ktor_version")
+    implementation("io.micrometer:micrometer-registry-prometheus:1.7.1")
+
 
 }

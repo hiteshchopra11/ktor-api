@@ -9,6 +9,7 @@ import io.ktor.auth.jwt.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
+import java.util.concurrent.TimeUnit
 
 fun Application.authenticateRoutes() {
     val secret = environment.config.property("jwt.secret").getString()
@@ -18,7 +19,7 @@ fun Application.authenticateRoutes() {
         post("/generate_token") {
             val user = call.receive<UserCredentials>()
             println("${user.username} , pwd= ${user.password}")
-            val token = JwtConfig.generateToken(user, issuer, secret, audience)
+            val token = JwtConfig.generateToken(user = user, issuer = issuer, secret = secret, audience = audience)
             call.respond(hashMapOf("token" to token))
         }
 
@@ -27,8 +28,11 @@ fun Application.authenticateRoutes() {
                 val principal = call.principal<JWTPrincipal>()
                 val username = principal!!.payload.getClaim("username").asString()
                 val expiresAt = principal.expiresAt?.time?.minus(System.currentTimeMillis())
-                println(call.response.status())
-                call.respondText("Hi $username!! Your token expires at $expiresAt ms.")
+                if (expiresAt != null) {
+                    call.respondText("Hi $username!! Your token expires in ${TimeUnit.MILLISECONDS.toMinutes(expiresAt)} minutes.")
+                } else {
+                    call.respondText("Hi $username!! Your token expires soon")
+                }
             }
         }
     }

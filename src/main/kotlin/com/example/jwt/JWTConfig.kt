@@ -20,7 +20,7 @@ object JwtConfig {
      * Produce a token for this combination of name and password
      */
 
-    fun generateToken(user: UserCredentials, secret: String, issuer: String, audience: String): String {
+    fun generateToken(user: UserCredentials, issuer: String, secret: String, audience: String): String {
         return JWT.create()
             .withAudience(audience)
             .withIssuer(issuer)
@@ -33,7 +33,7 @@ object JwtConfig {
      * Calculate the expiration Date based on current time + the given validity
      */
 
-    private const val validityInMs = 6000000 // 1 hours
+    private const val validityInMs = 3600000 // 1 hour
 
     private fun getExpiration() = Date(System.currentTimeMillis() + validityInMs)
 
