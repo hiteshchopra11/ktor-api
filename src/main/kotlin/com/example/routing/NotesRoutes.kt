@@ -115,5 +115,4 @@ fun Application.notesRoutes() {
             }
         }
     }
-
 }
