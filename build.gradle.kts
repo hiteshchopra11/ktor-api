@@ -38,8 +38,4 @@ dependencies {
 
     // Logging
     implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("io.ktor:ktor-metrics-micrometer:$ktor_version")
-    implementation("io.micrometer:micrometer-registry-prometheus:1.7.1")
-
-
 }

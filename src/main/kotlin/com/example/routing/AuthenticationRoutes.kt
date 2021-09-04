@@ -16,7 +16,7 @@ fun Application.authenticateRoutes() {
     val issuer = environment.config.property("jwt.issuer").getString()
     val audience = environment.config.property("jwt.audience").getString()
     routing {
-        post("/generate_token") {
+        post("/generate-token") {
             val user = call.receive<UserCredentials>()
             println("${user.username} , pwd= ${user.password}")
             val token = JwtConfig.generateToken(user = user, issuer = issuer, secret = secret, audience = audience)
