@@ -2,13 +2,16 @@
 
 KtorAPI is a project which demonstrates the power of Kotlin's Ktor in developing powerful REST APIs with all basic as well as advanced features.
 
+## Architecture
+Ktor Controller (http) -> Service (business) -> Repository (data)
 ## Features
 1. Create Notes
 2. Update Notes
 3. Fetch Notes
 4. Delete Notes
 5. JWT Authentication
-
+6. Ktorm ORM for DB
+7. Dependency Injection using Koin
 #### Coming soon -:
 
 1. Pagination
