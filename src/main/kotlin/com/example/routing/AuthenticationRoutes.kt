@@ -1,8 +1,8 @@
 package com.example.routing
 
 
-import com.example.jwt.JwtConfig
-import com.example.models.UserCredentials
+import com.example.data.auth.jwt.JwtConfig
+import com.example.data.models.UserCredentials
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.auth.jwt.*

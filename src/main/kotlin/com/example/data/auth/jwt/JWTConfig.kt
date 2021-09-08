@@ -1,9 +1,9 @@
-package com.example.jwt
+package com.example.data.auth.jwt
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.interfaces.JWTVerifier
-import com.example.models.UserCredentials
+import com.example.data.models.UserCredentials
 import java.util.*
 
 object JwtConfig {

@@ -1,28 +1,28 @@
 package com.example.routing
 
-import com.example.db.DatabaseConnection
-import com.example.entities.NotesEntity
-import com.example.models.Note
-import com.example.models.NoteRequest
-import com.example.models.NoteResponse
+import com.example.data.db.DatabaseConnection
+import com.example.data.entities.NotesEntity
+import com.example.data.models.Note
+import com.example.data.models.NoteRequest
+import com.example.data.models.NoteResponse
+import com.example.data.service.NotesService
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
+import org.koin.ktor.ext.inject
 import org.ktorm.dsl.*
 
 fun Application.notesRoutes() {
     val db = DatabaseConnection.database
 
+    // Lazy inject NotesService
+    val service: NotesService by inject()
+
     routing {
         get("/notes") {
-            val notes = db.from(NotesEntity).select().map {
-                val id = it[NotesEntity.id]
-                val note = it[NotesEntity.note]
-                Note(id ?: -1, note ?: "")
-            }
-            call.respond(notes)
+            call.respond(service.fetchNotes())
         }
 
         post("/notes") {

@@ -1,4 +1,4 @@
-package com.example.entities
+package com.example.data.entities
 
 import org.ktorm.schema.Table
 import org.ktorm.schema.int
