@@ -3,20 +3,22 @@ package com.example.data.repository
 import com.example.data.db.DatabaseConnection
 import com.example.data.entities.NotesEntity
 import com.example.data.models.Note
-import org.ktorm.dsl.from
-import org.ktorm.dsl.map
-import org.ktorm.dsl.select
+import org.ktorm.dsl.*
 
 class NotesRepository {
 
     val db = DatabaseConnection.database
 
-    fun addNote(note: String) {
-        println("Note Added $note")
+    fun addNote(note: String): Int {
+        return db.insert(NotesEntity) {
+            set(it.note, note)
+        }
     }
 
-    fun deleteNote(id: Int) {
-        println("Note with id $id deleted")
+    fun deleteNote(id: Int): Int {
+        return db.delete(NotesEntity) {
+            it.id eq id
+        }
     }
 
     fun updateNote(id: Int, note: String) {
@@ -30,5 +32,15 @@ class NotesRepository {
             val note = it[NotesEntity.note]
             Note(id ?: -1, note ?: "")
         }
+    }
+
+    fun fetchNoteWithId(id: Int): Note? {
+        return db.from(NotesEntity)
+            .select()
+            .where { NotesEntity.id eq id }
+            .map {
+                val note = it[NotesEntity.note]!!
+                Note(id = id, note = note)
+            }.firstOrNull()
     }
 }
