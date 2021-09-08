@@ -1,4 +1,4 @@
-package com.example.db
+package com.example.data.db
 
 import org.ktorm.database.Database
 

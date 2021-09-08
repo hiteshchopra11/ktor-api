@@ -1,6 +1,6 @@
 package com.example.plugins
 
-import com.example.jwt.JwtConfig
+import com.example.data.auth.jwt.JwtConfig
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.auth.jwt.*
