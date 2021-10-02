@@ -42,4 +42,10 @@ dependencies {
 
     // Koin
     implementation("io.insert-koin:koin-ktor:$koin_version")
+
+    /* The core module of Ktorm (ktorm-core) only provides support for
+    standard SQL, if we want to use some special features of a database, we need to support dialects. */
+
+    implementation("org.ktorm:ktorm-support-mysql:${ktorm_version}")
+
 }
