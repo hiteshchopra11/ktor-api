@@ -8,4 +8,5 @@ interface NotesService {
     fun updateNote(id: Int, note: String)
     fun fetchAllNotes(): List<Note>
     fun fetchNoteWithId(id: Int): Note?
+    fun fetchAllPaginatedNotes(page: Int, size: Int): List<Note>
 }

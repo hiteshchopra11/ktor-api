@@ -7,7 +7,7 @@ import org.ktorm.dsl.*
 
 class NotesRepository {
 
-    val db = DatabaseConnection.database
+    private val db = DatabaseConnection.database
 
     fun addNote(note: String): Int {
         return db.insert(NotesEntity) {
@@ -28,6 +28,18 @@ class NotesRepository {
     fun fetchNotes(): List<Note> {
         println("Fetching the notes")
         return db.from(NotesEntity).select().map {
+            val id = it[NotesEntity.id]
+            val note = it[NotesEntity.note]
+            Note(id ?: -1, note ?: "")
+        }
+    }
+
+    fun fetchPaginatedNotes(page: Int, size: Int): List<Note> {
+        println("Fetching the paginated list of notes")
+        val limit: Int = size
+        val pageSize: Int = size
+        val skip: Int = (page - 1) * pageSize
+        return db.from(NotesEntity).select().limit(offset = skip, limit = limit).map {
             val id = it[NotesEntity.id]
             val note = it[NotesEntity.note]
             Note(id ?: -1, note ?: "")

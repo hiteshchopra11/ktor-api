@@ -25,6 +25,12 @@ fun Application.notesRoutes() {
             call.respond(service.fetchAllNotes())
         }
 
+        get("/paginatedNotes") {
+            val page = call.request.queryParameters["page"]?.toInt() ?: 1 // Default Page is set to 1
+            val size = call.request.queryParameters["size"]?.toInt() ?: 5  // Default Size is set to 5
+            call.respond(service.fetchAllPaginatedNotes(page, size))
+        }
+
         post("/notes") {
             val request = call.receive<NoteRequest>()
             val result = service.addNote(request.note)

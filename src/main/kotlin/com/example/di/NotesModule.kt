@@ -6,6 +6,6 @@ import com.example.data.service.NotesServiceImpl
 import org.koin.dsl.module
 
 val notesModule = module {
-    single<NotesService> { NotesServiceImpl(get()) } // get() Will resolve HelloRepository
+    single<NotesService> { NotesServiceImpl(get()) } // get() Will resolve NotesRepository
     single { NotesRepository() }
 }
