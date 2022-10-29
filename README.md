@@ -13,15 +13,15 @@ Ktor Controller (http) -> Service (business) -> Repository (data)
 6. Ktorm ORM for DB
 7. Dependency Injection using Koin
 8. Pagination
+9. Sorting results using query parameters
 
 #### Coming soon -:
 
-1. Sorting results using parameters
-2. Unit Testing
-3. Middlewares for Validations
-4. Searching
-5. Exporting data in excel format
-6. Exporting data in csv format
+1. Unit Testing
+2. Middlewares for Validations
+3. Searching
+4. Exporting data in excel format
+5. Exporting data in csv format
 
 
 ## Installation
@@ -68,6 +68,11 @@ PUT http://0.0.0.0:3536/notes/{id}
 6. ##### Fetch paginated notes
 ```http
 GET http://0.0.0.0:3536/paginatedNotes?size=5&page=1
+```
+
+7. ##### Fetch sorted notes
+```http
+GET http://0.0.0.0:3536/notes?sort=asc
 ```
 
 ### JWT Authentication
