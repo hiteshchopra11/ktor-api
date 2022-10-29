@@ -39,7 +39,7 @@ class NotesRepository {
         val limit: Int = size
         val pageSize: Int = size
         val skip: Int = (page - 1) * pageSize
-        return db.from(NotesEntity).select().limit(skip, limit).map {
+        return db.from(NotesEntity).select().limit(offset = skip, limit = limit).map {
             val id = it[NotesEntity.id]
             val note = it[NotesEntity.note]
             Note(id ?: -1, note ?: "")
