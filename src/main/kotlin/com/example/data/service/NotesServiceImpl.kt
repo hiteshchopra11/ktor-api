@@ -27,4 +27,8 @@ class NotesServiceImpl(private val notesRepository: NotesRepository) : NotesServ
     override fun fetchAllPaginatedNotes(page: Int, size: Int): List<Note> {
         return notesRepository.fetchPaginatedNotes(page, size)
     }
+
+    override fun fetchSortedNotes(isDescending: Boolean?): List<Note> {
+        return notesRepository.fetchSortedNotes(isDescending = isDescending)
+    }
 }

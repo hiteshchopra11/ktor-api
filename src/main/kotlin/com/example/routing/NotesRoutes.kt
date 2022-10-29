@@ -1,5 +1,7 @@
 package com.example.routing
 
+import com.example.Constants.ASCENDING
+import com.example.Constants.DESCENDING
 import com.example.data.db.DatabaseConnection
 import com.example.data.entities.NotesEntity
 import com.example.data.models.NoteRequest
@@ -22,7 +24,25 @@ fun Application.notesRoutes() {
 
     routing {
         get("/notes") {
-            call.respond(service.fetchAllNotes())
+            when (val sortType = call.request.queryParameters["sort"]) {
+                // Sort according to ascending or descending
+                ASCENDING, DESCENDING -> {
+                    call.respond(
+                        service.fetchSortedNotes(isDescending = sortType == DESCENDING)
+                    )
+                }
+                // No sorting requested
+                null -> {
+                    call.respond(service.fetchAllNotes())
+                }
+                // Invalid sorting type
+                else -> {
+                    call.respond(
+                        HttpStatusCode.NotAcceptable,
+                        NoteResponse(success = false, data = "Please enter a valid sorting type(asc or desc)")
+                    )
+                }
+            }
         }
 
         get("/paginatedNotes") {

@@ -55,4 +55,18 @@ class NotesRepository {
                 Note(id = id, note = note)
             }.firstOrNull()
     }
+
+    fun fetchSortedNotes(isDescending: Boolean? = false): List<Note> {
+        val notes = NotesEntity
+        val notesSortedByName = if (isDescending == true) {
+            notes.note.desc()
+        } else {
+            notes.note.asc()
+        }
+        return db.from(NotesEntity).select().orderBy(notesSortedByName).map {
+            val id = it[NotesEntity.id]
+            val note = it[NotesEntity.note]
+            Note(id ?: -1, note ?: "")
+        }
+    }
 }
