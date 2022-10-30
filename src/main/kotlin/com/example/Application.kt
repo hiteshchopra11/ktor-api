@@ -1,10 +1,9 @@
 package com.example
 
-import com.example.plugins.*
-import io.ktor.application.*
-import io.ktor.server.netty.*
+import com.example.configure.*
+import io.ktor.server.application.*
 
-fun main(args: Array<String>): Unit = EngineMain.main(args)
+fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 fun Application.module() {
     configureKoin()

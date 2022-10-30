@@ -3,12 +3,12 @@ package com.example.routing
 
 import com.example.data.auth.jwt.JwtConfig
 import com.example.data.models.UserCredentials
-import io.ktor.application.*
-import io.ktor.auth.*
-import io.ktor.auth.jwt.*
-import io.ktor.request.*
-import io.ktor.response.*
-import io.ktor.routing.*
+import io.ktor.server.application.*
+import io.ktor.server.auth.*
+import io.ktor.server.auth.jwt.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 import java.util.concurrent.TimeUnit
 
 fun Route.authenticateRoutes(secret: String, issuer: String, audience: String) {
