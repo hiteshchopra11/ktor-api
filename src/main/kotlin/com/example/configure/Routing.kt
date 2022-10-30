@@ -1,10 +1,10 @@
-package com.example.plugins
+package com.example.configure
 
 import com.example.routing.authenticateRoutes
 import com.example.routing.notesRoutes
-import io.ktor.application.*
-import io.ktor.response.*
-import io.ktor.routing.*
+import io.ktor.server.application.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 
 fun Application.configureRouting() {
     val secret = environment.config.property("jwt.secret").getString()

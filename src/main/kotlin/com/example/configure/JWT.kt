@@ -1,9 +1,10 @@
-package com.example.plugins
+package com.example.configure
 
 import com.example.data.auth.jwt.JwtConfig
-import io.ktor.application.*
-import io.ktor.auth.*
-import io.ktor.auth.jwt.*
+import io.ktor.server.application.*
+import io.ktor.server.auth.*
+import io.ktor.server.auth.jwt.*
+
 
 fun Application.configureJWT() {
     val secret = environment.config.property("jwt.secret").getString()
