@@ -16,14 +16,14 @@ Ktor Controller (http) -> Service (business) -> Repository (data)
 7. Dependency Injection using Koin
 8. Pagination
 9. Sorting results using query parameters
+10. Middlewares/Plugins for Logging
 
 #### Coming soon -:
 
 1. Unit Testing
-2. Middlewares for Validations
-3. Searching
-4. Exporting data in excel format
-5. Exporting data in csv format
+2. Searching
+3. Exporting data in excel format
+4. Exporting data in csv format
 
 
 ## Installation
