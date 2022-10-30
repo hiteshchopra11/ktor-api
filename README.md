@@ -2,6 +2,8 @@
 
 KtorAPI is a project which demonstrates the power of Kotlin's Ktor in developing powerful REST APIs with all basic as well as advanced features.
 
+Ktor version -: 2.1.3
+
 ## Architecture
 Ktor Controller (http) -> Service (business) -> Repository (data)
 ## Features
